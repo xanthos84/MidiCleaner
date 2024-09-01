@@ -67,7 +67,7 @@ def process_directory(input_dir, output_dir):
                 remove_silence_from_midi(input_path, output_path)
 
 # Beispielaufruf
-input_directory = 'X:\\MIDIS\\CERBERUS1000_CHRISTIAN_BEAT_HIRT'  # Pfad zu deinem Verzeichnis mit MIDI-Dateien
-output_directory = 'X:\\1_out' # Pfad zum Zielverzeichnis für bearbeitete Dateien
+input_directory = 'put_your_input_dir_here'  # Pfad zu deinem Verzeichnis mit MIDI-Dateien
+output_directory = 'put_your_destination_dir_here' # Pfad zum Zielverzeichnis für bearbeitete Dateien
 
 process_directory(input_directory, output_directory)
