@@ -17,12 +17,20 @@ def remove_silence_from_midi(input_path, output_path):
         
         # Variable zum Überprüfen der ersten 'note_on' Nachricht
         first_note_checked = False
-
+        # Variable zum Überprüfen der ersten 'aftertouch' Nachricht
+        first_aftertouch_checked = False
+        
         for msg in track:
+            print(msg)
             if msg.type == 'channel_prefix':
                 print(f"Found 'channel_prefix' MetaMessage in Track {i} with channel {msg.channel} and time {msg.time}. Setting time to 0.")
                 # time auf 0 setzen
                 msg.time = 0
+            if msg.type == 'aftertouch':
+                if not first_aftertouch_checked:
+                    msg.time = 0
+                    print(f"Aftertouch found, cleaning...")
+                    first_aftertouch_checked = True
             if msg.type == 'note_on' and msg.velocity > 0:
                 if not first_note_checked:
                     
@@ -67,7 +75,7 @@ def process_directory(input_dir, output_dir):
                 remove_silence_from_midi(input_path, output_path)
 
 # Beispielaufruf
-input_directory = 'put_your_input_dir_here'  # Pfad zu deinem Verzeichnis mit MIDI-Dateien
-output_directory = 'put_your_destination_dir_here' # Pfad zum Zielverzeichnis für bearbeitete Dateien
+input_directory = 'X:\\1_out'  # Pfad zu deinem Verzeichnis mit MIDI-Dateien
+output_directory = 'X:\\out' # Pfad zum Zielverzeichnis für bearbeitete Dateien
 
 process_directory(input_directory, output_directory)
